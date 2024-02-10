@@ -3,6 +3,7 @@ package Assignment_2;
 public class Third {
     public static void main(String[] args) {
         design(4);
+
     }
     public static void design(int n){
         for (int i = 1; i <= n; i++) {
@@ -26,3 +27,5 @@ public class Third {
         }
     }
 }
+
+
