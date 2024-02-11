@@ -14,12 +14,13 @@ public class First {
 //        }
         int[] array = {1, 2, 3, 4, 2, 5, 6, 1, 7, 8, 3, 9, 10};
         System.out.println("Array with duplicate elements: " + Arrays.toString(array));
-        Arrays.sort(array);
+
 
         int[] newArr = removeDuplicates(array);
         System.out.println("New array without duplicate elements: " + Arrays.toString(newArr));
     }
     public static int[] removeDuplicates(int[] array) {
+        Arrays.sort(array);
         int length = array.length;
         int j = 0;
         for (int i = 0; i < length - 1; i++) {
