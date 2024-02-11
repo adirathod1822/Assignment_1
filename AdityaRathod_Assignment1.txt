@@ -1,0 +1,114 @@
+============================1============================
+    public static int[] removeDuplicates(int[] array) {
+        Arrays.sort(array);
+        int length = array.length;
+        int j = 0;
+        for (int i = 0; i < length - 1; i++) {
+            if (array[i] != array[i + 1]) {
+                array[j++] = array[i];
+            }
+        }
+        array[j++] = array[length - 1];
+        int[] newArray = new int[j];
+        for (int i = 0; i < j; i++) {
+            newArray[i] = array[i];
+        }
+        return newArray;
+    }
+
+============================2============================
+    public static void main(String[] args) {
+        int[] arr = {39, 32, 51, 60, 54, 60};
+        int max=0;
+        int runner=0;
+        for (int i=0; i<arr.length; i++) {
+            if(arr[i]>max){
+                runner = max;
+                max = arr[i];
+            }
+            else if(arr[i]>runner && max!=arr[i]){
+                runner = arr[i];
+            }
+        }
+        System.out.println("The winner is with marks : " + max);
+        System.out.println("The runners up with marks : " + runner);
+    }
+
+============================3============================
+    public static void numFreq(int[] array){
+        int count = 0;
+        Map<Integer, Integer> freq = new HashMap<>();
+
+        for (int i = 0; i < array.length; i++) {
+            for (int j = 0; j < array.length; j++) {
+                if(array[i] == array[j]) {
+                    count++;
+                }
+            }
+            freq.put(array[i],count);
+            count = 0;
+        }
+        System.out.println("Array: " + Arrays.toString(array));
+        System.out.println("Frquency of elements: " + freq);
+    }
+
+============================4============================
+    public static String addBinary(String binary1, String binary2) {
+        StringBuilder result = new StringBuilder();
+        int carry = 0;
+        int i = binary1.length() - 1;
+        int j = binary2.length() - 1;
+
+        while (i >= 0 || j >= 0 || carry != 0) {
+            int digit1 = i >= 0 ? binary1.charAt(i) - '0' : 0;
+            int digit2 = j >= 0 ? binary2.charAt(j) - '0' : 0;
+
+            int sum = digit1 + digit2 + carry;
+            result.insert(0, sum % 2);
+            carry = sum / 2;
+
+            i--;
+            j--;
+        }
+
+        return result.toString();
+    }
+
+============================5============================
+
+         public static void main(String[] args) {
+            Scanner scanner = new Scanner(System.in);
+             double result;
+            System.out.print("Enter first number: ");
+            double num1 = scanner.nextDouble();
+            System.out.print("Enter second number: ");
+            double num2 = scanner.nextDouble();
+
+            System.out.print("Enter the operation (+, -, *, /): ");
+            char operator = scanner.next().charAt(0);
+
+            switch (operator) {
+                case '+':
+                    result = num1 + num2;
+                    System.out.println("Result: " + result);
+                    break;
+                case '-':
+                    result = num1 - num2;
+                    System.out.println("Result: " + result);
+                    break;
+                case '*':
+                    result = num1 * num2;
+                    System.out.println("Result: " + result);
+                    break;
+                case '/':
+                    if (num2 != 0) {
+                        result = num1 / num2;
+                        System.out.println("Result: " + result);
+                    } else {
+                        System.out.println("Error: Division by zero!");
+                    }
+                    break;
+                default:
+                    System.out.println("Error: Invalid operator!");
+            }
+        }

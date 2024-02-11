@@ -1,0 +1,146 @@
+============================1============================
+    public static boolean isPlaindrome(int num){
+        int reversed= 0;
+        int rem = 0 ;
+        int orginal = num;
+
+        while (num > 0){
+            rem = num % 10;
+            reversed = (reversed * 10) + rem;
+            num /= 10;
+        }
+        return orginal == reversed;
+    }
+
+============================2============================
+   public static int[] leftRotate(int[] arr, int d) {
+       int n = arr.length;
+       int[] rotatedArray = new int[n];
+
+       d = d % n;
+
+       for (int i = 0; i < n - d; i++) {
+           rotatedArray[i] = arr[i + d];
+       }
+       for (int i = 0; i < d; i++) {
+           rotatedArray[n - d + i] = arr[i];
+       }
+       return rotatedArray;
+   }
+============================3============================
+    public static void design(int n){
+        for (int i = 1; i <= n; i++) {
+            for (int j = n; j > i; j--) {
+                System.out.print(" ");
+            }
+            for (int k = 0; k < i * 2 - 1; k++) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+
+        for (int i = 1; i <= n - 1; i++) {
+            for (int j = 0; j < i; j++) {
+                System.out.print(" ");
+            }
+            for (int k = (n-i)*2-1; k>0; k--) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+    }
+
+============================4============================
+    public static void alphaPattern(int n, char alpha){
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n - i - 1; j++) {
+                System.out.print(" ");
+            }
+            for (int j = 0; j < (2 * i) + 1; j++) {
+                if (j == 0 || j == 2 * i) {
+                    System.out.print(alpha);
+                } else {
+                    System.out.print(" ");
+                }
+            }
+            System.out.println();
+            alpha++;
+        }
+
+        alpha -= 2;
+
+
+        for (int i = n - 2; i >= 0; i--) {
+            for (int j = 0; j < n - i - 1; j++) {
+                System.out.print(" ");
+            }
+            for (int j = 0; j < (2 * i) + 1; j++) {
+                if (j == 0 || j == 2 * i) {
+                    System.out.print(alpha);
+                } else {
+                    System.out.print(" ");
+                }
+            }
+            System.out.println();
+            alpha--;
+        }
+    }
+
+============================5============================
+    public static void BMICalculator(float heightInInches, float weightInPounds) {
+
+        float heightInMeters = heightInInches * 0.0254f;
+        float weightInKg = weightInPounds * 0.453592f;
+
+        float bmi = weightInKg / (heightInMeters * heightInMeters);
+
+        if (bmi <= 16.00) {
+            System.out.println("Your BMI is " + bmi + ". You are in the starvation category.");
+        } else if (bmi <= 16.99) {
+            System.out.println("Your BMI is " + bmi + ". You are in the emaciation category.");
+        } else if (bmi <= 18.49) {
+            System.out.println("Your BMI is " + bmi + ". You are in the underweight category.");
+        } else if (bmi <= 22.99) {
+            System.out.println("Your BMI is " + bmi + ". You are in the normal, low range category.");
+        } else if (bmi <= 24.99) {
+            System.out.println("Your BMI is " + bmi + ". You are in the normal high range category.");
+        } else if (bmi <= 27.49) {
+            System.out.println("Your BMI is " + bmi + ". You are in the overweight low range category.");
+        } else if (bmi <= 29.99) {
+            System.out.println("Your BMI is " + bmi + ". You are in the overweight high range category.");
+        } else if (bmi <= 34.99) {
+            System.out.println("Your BMI is " + bmi + ". You are in the 1st degree obesity category.");
+        } else if (bmi <= 39.99) {
+            System.out.println("Your BMI is " + bmi + ". You are in the 2nd degree obesity category.");
+        } else {
+            System.out.println("Your BMI is " + bmi + ". You are in the 3rd degree obesity category.");
+        }
+    }
+
+============================6============================
+    public static void digSumMatrix(int[][] matrix) {
+
+        int diagonalSum = 0;
+
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[i].length; j++) {
+                matrix[i][j] = 0;
+            }
+        }
+        for (int i = 0; i < matrix.length; i++) {
+            matrix[i][i] = i;
+        }
+        for (int i = 0; i < matrix.length; i++) {
+            diagonalSum += matrix[i][i];
+        }
+
+        System.out.println("Matrix:");
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[i].length; j++) {
+                System.out.print(matrix[i][j] + " ");
+            }
+            System.out.println();
+        }
+
+        System.out.println("Sum of elements on the diagonal: " + diagonalSum);
+    }
