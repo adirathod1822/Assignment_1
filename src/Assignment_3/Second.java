@@ -9,7 +9,7 @@ public class Second {
         String s = sc.nextLine();
         System.out.print("Enter numbers of character: ");
         long n = sc.nextLong();
-        System.out.println(repeatedAinInfiniteString(s,n));
+        System.out.print(repeatedAinInfiniteString(s,n));
 
     }
     public static long repeatedAinInfiniteString(String s, long n){
