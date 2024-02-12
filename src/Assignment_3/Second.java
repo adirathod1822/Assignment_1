@@ -1,20 +1,25 @@
 package Assignment_3;
 
-import java.math.BigInteger;
+import java.util.*;
 
 public class Second {
     public static void main(String[] args) {
-        System.out.println(repeatedAinInfiniteString("a",100000000));;
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter String: ");
+        String s = sc.nextLine();
+        System.out.print("Enter numbers of character: ");
+        long n = sc.nextLong();
+        System.out.println(repeatedAinInfiniteString(s,n));
 
     }
-    public static int repeatedAinInfiniteString(String s, long n){
-        int count = 0;
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < n/s.length()+1; i++) {
-            sb.append(s);
+    public static long repeatedAinInfiniteString(String s, long n){
+        int len = s.length();
+        int index = 0;
+        int j =0;
+        for(int i=0; i<s.length();i++){
+            if('a'==s.charAt(i)) index++;
         }
-        char[] arr = sb.toString().toCharArray();
-        for(int i=0; i<n; i++) if(arr[i]=='a') count++;
+        long count = (n/len)*index + (n%len);
         return count;
     }
-}
+    }
