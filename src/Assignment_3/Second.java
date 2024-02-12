@@ -15,7 +15,7 @@ public class Second {
     public static long repeatedAinInfiniteString(String s, long n){
         int len = s.length();
         int index = 0;
-        int j =0;
+        int j = 0;
         for(int i=0; i<s.length();i++){
             if('a'==s.charAt(i)) index++;
         }
