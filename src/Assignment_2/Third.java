@@ -2,7 +2,7 @@ package Assignment_2;
 
 public class Third {
     public static void main(String[] args) {
-        design(4);
+        design(5);
 
     }
     public static void design(int n){
