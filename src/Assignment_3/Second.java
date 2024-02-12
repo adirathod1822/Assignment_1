@@ -19,7 +19,6 @@ public class Second {
         for(int i=0; i<s.length();i++){
             if('a'==s.charAt(i)) index++;
         }
-        long count = (n/len)*index + (n%len);
-        return count;
+        return (n/len)*index + (n%len);
     }
     }
