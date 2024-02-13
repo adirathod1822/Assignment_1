@@ -19,7 +19,7 @@ public class Second {
         for(int i=0; i<s.length();i++) {
             if ('a' == s.charAt(i)) {
                 index++;
-                if (i<n%len) count++;
+                if (i<n%len) count+=1;
             }
         }
         count += (n/len)*index;
