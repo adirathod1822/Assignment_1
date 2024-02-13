@@ -27,7 +27,6 @@ public class First {
         for(String s:ans){
             if(s!=null) System.out.println(s);
         }
-//        System.out.println(Arrays.toString(ans));
 
     }
     public static boolean isOdd(int n){
