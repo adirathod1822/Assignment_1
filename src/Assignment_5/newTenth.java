@@ -5,6 +5,10 @@ import java.util.*;
 public class newTenth {
     public static void main(String[] args) {
         String[] str = {"eat","tea","tan","ate","nat","bat"};
+//        String[] str = {"eat","&","tan","&","nat","bat"};
+//        key = aet ,[tea,ate]
+//        ant
+//        abt
         List<List<String>> ans = stringListAnagrams(str);
         System.out.println(ans);
     }
@@ -14,7 +18,6 @@ public class newTenth {
             if(str[i] == "&") continue;
             char[] i_charArr = str[i].toCharArray();
             Arrays.sort(i_charArr);
-            //aet
             if(!map.containsKey(Arrays.toString(i_charArr))) map.put(Arrays.toString(i_charArr), new ArrayList<>());
             for (int j = 0; j < str.length; j++) {
                 if(str[j] == "&") continue;
@@ -27,7 +30,7 @@ public class newTenth {
                 }
 
         }
-
+//     [[],[],[]]
         List<List<String>> ansList = new ArrayList<>(map.values());
 
         return ansList;
