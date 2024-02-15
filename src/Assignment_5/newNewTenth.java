@@ -21,8 +21,7 @@ public class newNewTenth {
                 map.get(Arrays.toString(chArr)).add(str[i]);
             }
             else
-                map.get(Arrays.toString(chArr)).add(str[i]);
-            }
+                map.get(Arrays.toString(chArr)).add(str[i])
         System.out.println(map);
         List<List<String>> ans = new ArrayList<>(map.values());
         return ans;
