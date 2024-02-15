@@ -4,31 +4,35 @@ import java.util.*;
 
 public class Tenth {
     public static void main(String[] args) {
-        List<String> list = new ArrayList<>();
-        System.out.println(list);
-        HashMap<Character, List<String>> maps = new HashMap<>();
-        String[] strs = {"eat", "tea", "tan", "ate", "nat", "bat"};
-        int i = 0;
-        int j = 0;
-        while (i != strs.length ) {
-            char[] arr = strs[i].toCharArray();
-            Arrays.sort(arr);
-            i++;
-            while (j != strs.length ) {
-                List<String> st = new ArrayList<>();
-                char[] arr2 = strs[j].toCharArray();
-                Arrays.sort(arr2);
-               if (Arrays.equals(arr, arr2)) {
-                    System.out.println(strs[i] + " " + strs[j]);
-                    if(!st.contains(strs[j])){
-                        st.add(strs[j]);
-                    }
-                } else System.out.println(strs[i]);
-                j++;
-                System.out.println(st);
-            }
-            j = i + 1;
-        }
+        String[] str = {"eat","tea","tan","ate","nat","bat"};
+        List<List<String>> ans = groupAnagrams(str);
+        System.out.println(ans);
 
     }
+        public static List<List<String>> groupAnagrams(String[] strs) {
+            Map<String, List<String>> res = new HashMap<>();
+
+            for (String s : strs) {
+                int[] count = new int[26];
+
+                for (char c : s.toCharArray()) {
+                    count[c - 'a']++;
+                }
+
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0; i < 26; i++) {
+                    sb.append('#');
+                    sb.append(count[i]);
+                }
+                String key = sb.toString();
+
+                if (!res.containsKey(key)) {
+                    res.put(key, new ArrayList<>());
+                }
+                res.get(key).add(s);
+            }
+
+            return new ArrayList<>(res.values());
+        }
+
 }
