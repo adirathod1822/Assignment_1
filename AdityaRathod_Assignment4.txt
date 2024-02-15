@@ -1,0 +1,52 @@
+============================1============================
+System.out.println(Pattern.matches("[a-zA-z0-9]{0,6}","a"));
+
+============================2============================
+System.out.println(Pattern.matches("[789][0-9]{9}","9510953624"));
+
+============================3============================
+System.out.println(Pattern.matches("^(?=.*a)(?=.*b)(?=.*c)(?=.*d)(?=.*e)(?=.*f)(?=.*g)(?=.*h)(?=.*i)(?=.*j)(?=.*k)(?=.*l)(?=.*m)(?=.*n)(?=.*o)(?=.*p)(?=.*q)(?=.*r)(?=.*s)(?=.*t)(?=.*u)(?=.*v)(?=.*w)(?=.*x)(?=.*y)(?=.*z)[a-zA-Z]{26,}$","qwertyuiopasdfghjklzxcvbnn"));
+
+============================4============================
+    public static void main(String[] args) {
+        String s1 = "I love Java";
+        String s2 = "But Not interested in Regex";
+
+        Pattern p = Pattern.compile("\\b\\w");
+        Matcher m1 = p.matcher(s1);
+        Matcher m2 = p.matcher(s2);
+        System.out.println("First letter of each word from string \"" + s1 + "\" : ");
+        while (m1.find())
+            System.out.print(m1.group());
+        System.out.println();
+        System.out.println("First letter of each word from string \"" + s2 + "\" : ");
+        while (m2.find())
+            System.out.print(m2.group());
+    }
+
+============================5============================
+ public static void main(String[] args) {
+        String s1 = "Aditya";
+        String s2 = "Rathod";
+
+        System.out.println("Before :-");
+        System.out.print("S1 ");
+        System.out.println(s1);
+        System.out.print("S2 ");
+        System.out.println(s2);
+        s1 = s1 + ", " + s2;
+
+        Pattern r = Pattern.compile("^(.*?),\\s*(.*?)$");
+        Matcher m = r.matcher(s1);
+
+        if (m.find()) {
+            s1 = m.group(2);
+            s2 = m.group(1);
+        }
+
+        System.out.println("After:-");
+        System.out.print("S1 ");
+        System.out.println(s1);
+        System.out.print("S2 ");
+        System.out.println(s2);
+    }
