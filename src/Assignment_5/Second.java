@@ -19,7 +19,7 @@ class Manager extends Employee{
     @Override
     void display() {
         if (this.employeeId!=0 && this.employeeName != null )
-        System.out.println("Net Salary of "+ this.employeeName + " is "+this.netSalary());
+        System.out.println("Net Salary of "+ this.employeeId + " : " + this.employeeName+ " is " +this.netSalary());
         else System.out.println("Enter required detials ");
     }
 }
@@ -34,7 +34,7 @@ class Clerk extends Employee{
     @Override
     void display() {
         if (this.employeeId!=0 && this.employeeName != null )
-        System.out.println("Net Salary of "+ this.employeeName + " is " +this.netSalary());
+        System.out.println("Net Salary of "+ this.employeeId + " : " + this.employeeName+ " is " +this.netSalary());
         else System.out.println("Enter required details!!");
     }
 }
