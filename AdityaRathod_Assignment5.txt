@@ -1,0 +1,217 @@
+============================1============================
+class Bank{
+    int accountNumber;
+    double balance;
+    boolean dep;
+    double deposit(double amount){
+        this.dep = true;
+        return this.balance+=amount;
+    }
+    void  withdraw(double amount){
+        if(dep) this.balance -= amount;
+        else System.out.println("You must deposit some amount");
+    }
+    double Balance(int accountNumber){
+        return this.balance;
+    }
+}
+public class First {
+    public static void main(String[] args) {
+        Bank b = new Bank();
+            b.accountNumber = 00000000000624;
+            b.deposit(10000);
+            b.withdraw(1000);
+
+            System.out.println(b.Balance(b.accountNumber));
+    }
+
+}
+
+============================2============================
+abstract class Employee{
+    int employeeId;
+    String employeeName;
+    double monthlySalary;
+    abstract double netSalary();
+    abstract void display();
+}
+class Manager extends Employee{
+    @Override
+    double netSalary() {
+        if(this.employeeId != 0 && this.employeeName != null)
+        return this.monthlySalary*12;
+        else System.out.println("Enter required detials ");
+        return 0.0;
+
+    }
+
+    @Override
+    void display() {
+        if (this.employeeId!=0 && this.employeeName != null )
+        System.out.println("Net Salary of "+ this.employeeId + " : " + this.employeeName+ " is " +this.netSalary());
+        else System.out.println("Enter required detials ");
+    }
+}
+class Clerk extends Employee{
+    @Override
+    double netSalary() {
+        if(this.employeeId != 0 && this.employeeName != null)
+        return this.monthlySalary*12;
+        return 0.0;
+    }
+
+    @Override
+    void display() {
+        if (this.employeeId!=0 && this.employeeName != null )
+        System.out.println("Net Salary of "+ this.employeeId + " : " + this.employeeName+ " is " +this.netSalary());
+        else System.out.println("Enter required details!!");
+    }
+}
+public class Second {
+    public static void main(String[] args) {
+        Clerk c = new Clerk();
+        c.employeeId = 33;
+        c.employeeName = "Clerk Clerky";
+        c.monthlySalary = 28000.00;
+
+        c.display();
+
+        Manager m = new Manager();
+        m.employeeId = 44;
+        m.employeeName = "Mani Manager";
+        m.monthlySalary = 56000;
+        m.display();
+    }
+}
+
+============================3============================
+import java.util.*;
+
+class NegativeSizeException extends Exception{
+    public NegativeSizeException(String str){
+        super(str);
+    }
+}
+public class Third extends Exception{
+    public static void main(String[] args)  {
+        try{
+            Scanner ip = new Scanner(System.in);
+            System.out.print("Enter total elements: ");
+            int size = ip.nextInt();
+            int[] i = new int[size];
+            for (int j = 0; j < i.length; j++) {
+                System.out.print("Enter elements at "+ j +": ");
+                int a = ip.nextInt();
+                if(a>=0) i[j] = a;
+                else throw new NegativeSizeException("Negative number given as input!!!");
+            }
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+}
+
+
+============================4============================
+    static void employeeTax(int salary){
+        double tax = 0;
+        if(salary>0 && salary<=50000) tax = 0;
+        else if(salary<=60000) tax = (salary-50000)*0.1;
+        else if(salary<=150000) tax = 1000 + ((salary-60000)*0.2);
+        else if(salary>150000) tax =  1000+ 18000+ ((salary-150000)*0.3);
+        System.out.println("Income Tax is " + tax);
+    }
+
+============================5============================
+public static void main(String args[]){
+            Scanner sc = new Scanner(System.in);
+            System.out.print("Enter a digit you want to display: ");
+            int n = sc.nextInt();
+            switch (n) {
+                case 0:
+                    System.out.println(" __ \n|  | \n|__|");
+                    break;
+                case 1:
+                    System.out.println("   \n   |\n   |");
+                    break;
+                case 2:
+                    System.out.println(" __ \n __|\n|__ ");
+                    break;
+                case 3:
+                    System.out.println(" __ \n __|\n __|");
+                    break;
+                case 4:
+                    System.out.println("   \n|__|\n   |");
+                    break;
+                case 5:
+                    System.out.println(" __ \n|__ \n __|");
+                    break;
+                case 6:
+                    System.out.println(" __ \n|__ \n|__|");
+                    break;
+                case 7:
+                    System.out.println(" __ \n   |\n   |");
+                    break;
+                case 8:
+                    System.out.println(" __ \n|__|\n|__|");
+                    break;
+                case 9:
+                    System.out.println(" __ \n|__|\n __|");
+                    break;
+
+            }
+        }
+
+============================6============================
+    public static void main(String[] args) {
+        for (int i = 0; i < 51; i++) {
+            if(i%3 == 0&&i%5 == 0) System.out.println(i +"FizzBuzz");
+            else if(i%3 == 0) System.out.println(i + "Fizz");
+            else if(i%5 == 0) System.out.println(i +"Buzz");
+        }
+    }
+
+============================7============================
+    static void pigLatinTranslator(String name){
+        System.out.println(name.split("\\b\\w")[1] +name.charAt(0)+ "ay");
+    }
+
+============================8============================
+    static void validUsername(String str){
+        if(Pattern.matches("[a-zA-Z][a-zA-Z0-9|_]{8,30}",str))
+            System.out.println("Valid Username");
+        else System.out.println("Invalid Username");
+    }
+
+============================9============================
+    static void substringCharacter(String str,int beginIndex,int endIndex){
+        char[] chArr = endIndex <= str.length() ? str.substring(beginIndex, endIndex+1).toCharArray() :
+                str.substring(beginIndex, str.length()).toCharArray();
+        for(char a : chArr) System.out.println(a);
+    }
+
+============================10===========================
+    static List<List<String>> stringListAnagrams(String[] str){
+        HashMap<String,List<String>> map = new HashMap<>();
+        for (int i = 0; i < str.length; i++) {
+            if(str[i] == "&") continue;
+            char[] i_charArr = str[i].toCharArray();
+            Arrays.sort(i_charArr);
+            if(!map.containsKey(Arrays.toString(i_charArr))) map.put(Arrays.toString(i_charArr), new ArrayList<>());
+            for (int j = 0; j < str.length; j++) {
+                if(str[j] == "&") continue;
+                char[] j_charArr = str[j].toCharArray();
+                    Arrays.sort(j_charArr);
+                    if (Arrays.equals(i_charArr, j_charArr)) {
+                        map.get(Arrays.toString(i_charArr)).add(str[j]);
+                        str[j] = "&";
+                    }
+                }
+
+        }
+
+        List<List<String>> ansList = new ArrayList<>(map.values());
+
+        return ansList;
+    }

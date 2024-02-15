@@ -11,23 +11,23 @@ public class newTenth {
     static List<List<String>> stringListAnagrams(String[] str){
         HashMap<String,List<String>> map = new HashMap<>();
         for (int i = 0; i < str.length; i++) {
-            if(str[i] == "") continue;
-
-            if(!map.containsKey(str[i])) map.put(str[i], new ArrayList<>());
+            if(str[i] == "&") continue;
             char[] i_charArr = str[i].toCharArray();
             Arrays.sort(i_charArr);
-                for (int j = i; j < str.length; j++) {
-                    char[] j_charArr = str[j].toCharArray();
+            //aet
+            if(!map.containsKey(Arrays.toString(i_charArr))) map.put(Arrays.toString(i_charArr), new ArrayList<>());
+            for (int j = 0; j < str.length; j++) {
+                if(str[j] == "&") continue;
+                char[] j_charArr = str[j].toCharArray();
                     Arrays.sort(j_charArr);
-
                     if (Arrays.equals(i_charArr, j_charArr)) {
-                        System.out.println(j_charArr);
-                        map.get(str[i]).add(str[j]);
-                        str[j] = "";
+                        map.get(Arrays.toString(i_charArr)).add(str[j]);
+                        str[j] = "&";
                     }
                 }
 
         }
+
         List<List<String>> ansList = new ArrayList<>(map.values());
 
         return ansList;
