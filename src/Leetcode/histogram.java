@@ -5,19 +5,26 @@ import java.util.Arrays;
 
 public class histogram {
     public static void main(String[] args) {
-        String[] s= {"asd", "sdf", "dfg","dfg"};
-        ArrayList<String> a = new ArrayList<String>(Arrays.asList(s));
+        int[] heights = {2,1,5,6,2,3};
+//        System.out.println(heights.length);
+//        int[] max = new int[heights.length-1];
+        int max = 0;
+        int prev = 0;
+        int count = 1;
+        for (int i = 0; i < heights.length; i++) {
+            if(heights[i]>heights[max]) {
+                max = i;
+            }
+            if((heights[i]<heights[max] && heights[prev]<heights[i] )&& heights.length>1) {
+                prev = i;
+                System.out.println(heights[i]);
+                count+=1;
+            }
 
-        System.out.println(a);
+        }
+        System.out.println(heights[max]);
+        System.out.println(count);
+        System.out.println(heights[prev]*count);
     }
-//        int[] heights = {2,1,5,6,2,3};
-//        Arrays.sort(heights);
-//        System.out.println(Arrays.toString(heights));
-//        int count = 0;
-////        System.out.println(pointer*2);
-//        for (int i = heights.length-1; i >0 ; i--) {
-//            if( heights[i] == heights[i-1]+1) count++;
-//
-//        System.out.println(count);
-    }
+}
 
