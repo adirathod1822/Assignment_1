@@ -5,34 +5,17 @@ import java.util.Stack;
 public class validParanthesis {
     public static void main(String[] args) {
         String s = "()";
-
-        boolean valid = false;
+        boolean valid = true;
         Stack<Character> st = new Stack<>();
         char[] ch = s.toCharArray();
-        for(int i=0; i<ch.length;i++){
-             if(ch[i] =='(' || ch[i] =='{' || ch[i] =='[') {
-                 System.out.println(ch[i]);
-                 st.push(ch[i]);
-             }
-             else if(!st.isEmpty()){
-//                 System.out.println(ch[i]);
-                 if ((ch[i] == '}' && st.peek() == '{') || (ch[i] == ']' && st.peek() == '[') || (ch[i] == ')' && st.peek() == '(')) {
-                     st.pop();
-//                     System.out.println(ch[i]);
-                     valid = true;
-                 }
-                else {
-//                     System.out.println("hi");
-                     valid = false;
-                     break;
-                 }
-             }
-            else {
-                 valid = false;
-                break;
-            }
+        for (char c:ch){
+            if(c == '[') st.push('[');
+            else if(c == '{') st.push('{');
+            else if(c == '(') st.push('(');
+            else if(st.empty() || st.pop()!=c) valid = false;
         }
-        System.out.println(valid);
+//        System.out.println(valid);
+        System.out.println(st.empty());
     }
 }
 //        st.peek() == '}' || st.peek() == ']' || st.peek() == ')'
