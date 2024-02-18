@@ -1,35 +1,26 @@
 package Assignment_6;
 
-
+import java.sql.*;
     public class SQLServerConnection {
-//        public static void main(String[] args) {
-//            // JDBC URL for SQL Server, change accordingly
-//            String url = "jdbc:sqlserver://localhost:1433;databaseName=mydatabase";
-//            String username = "sa";
-//            String password = "your_password";
-//
-//            try {
-//                // Load the SQLServer JDBC driver
-//                Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-//
-//                // Establish the connection
-//                Connection connection = DriverManager.getConnection(url, username, password);
-//
-//                if (connection != null) {
-//                    System.out.println("Connected to the database!");
-//
-//                    // Perform database operations here
-//
-//                    // Don't forget to close the connection when done
-//                    connection.close();
-//                } else {
-//                    System.out.println("Failed to connect to the database.");
-//                }
-//            } catch (ClassNotFoundException e) {
-//                System.out.println("JDBC driver not found: " + e.getMessage());
-//            } catch (SQLException e) {
-//                System.out.println("SQL Exception: " + e.getMessage());
-//            }
-//        }
+        public static void main(String[] args) {
+            String url = "jdbc:sqlserver://rex; trustServerCertificate=true;databaseName = airport_db";
+            String user = "sa";
+            String password = "01082002";
+            try {
+                Connection connection = DriverManager.getConnection(url, user,password);
+                Statement stmt = connection.createStatement();
+                String s = "Select * from dbo.citymast";
+                ResultSet rs = stmt.executeQuery(s);
+                if(rs.next()){
+                    System.out.println(rs.getString(2));
+                }
+
+                System.out.println("Connected!!");
+
+            catch(SQLException e) {
+                System.out.println("error!!");
+                e.printStackTrace();
+            }
+        }
     }
 
