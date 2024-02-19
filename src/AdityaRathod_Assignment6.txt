@@ -1,0 +1,119 @@
+============================1.1============================
+        List<Integer> list= List.of(1,1,2,2,3,3,4,4);
+        List <Integer> ans =list.stream().distinct().toList();
+        System.out.println(ans);
+
+        //using set
+        Integer[] a = {1,1,2,2,3,3,4,4};
+        Set<Integer> set = new HashSet<>(List.of(a));
+        System.out.println(set);
+
+============================1.2============================
+        Random rand = new Random();
+        List<Integer> list= new ArrayList<>();
+        for(int i=0; i<5; i++) list.add(rand.nextInt(100));
+        System.out.println("Marks: " + list);
+        Collections.sort(list, Collections.reverseOrder());
+        System.out.println("The winner is with marks :- "+list.get(0)+"\nThe runners up with marks :- "+list.get(1));
+
+============================1.3============================
+        Integer[] a = {1,2,2,4,2,5,4,3,5};
+        List<Integer> list= new ArrayList<>(List.of(a));
+        Map<Integer, Long> map = list
+                .stream()
+                .distinct()
+                .collect(Collectors.toMap(entry -> entry, entry -> list.stream().filter(entry::equals).count()));
+        System.out.println(map);
+
+============================2==============================
+package Assignment_6;
+import java.util.*;
+class Student{
+    String name;
+    int age;
+    double grade;
+    Student(String name, int age,double grade){
+        this.name = name;
+        this.age = age;
+        this.grade = grade;
+    }
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public double getGrade() {
+        return grade;
+    }
+}
+class StudentDataManagement {
+    private List<Student> st;
+    public StudentDataManagement() {
+        st = new ArrayList<>();
+    }
+    public List<Student> getStudentDataManagement(){
+        return st;
+    }
+    public void addStudent(Student student) {
+        st.add(student);
+    }
+    public double calculateAvg(){
+        return st.stream().mapToInt(Student::getAge).average().getAsDouble();
+    }
+    public void findStudentsByName(String name){
+        System.out.println("Name: "+ st.stream().filter(Student -> name.equalsIgnoreCase(Student.getName())).toList().get(0).getName() );
+        System.out.println("Age: "+ st.stream().filter(Student -> name.equalsIgnoreCase(Student.getName())).toList().get(0).getAge() );
+        System.out.println("Name: "+ st.stream().filter(Student -> name.equalsIgnoreCase(Student.getName())).toList().get(0).getGrade() );
+    }
+}
+
+public class Fourth {
+    public static void main(String[] args) {
+        StudentDataManagement data = new StudentDataManagement();
+        data.addStudent(new Student("Rex", 20, 85.5));
+        data.addStudent(new Student("max", 22, 91.0));
+        data.addStudent(new Student("jex", 21, 78.3));
+        data.addStudent(new Student("fex", 23, 88.9));
+        data.findStudentsByName("jex");
+        System.out.println("Avergae age: " + data.calculateAvg());
+    }
+}
+
+
+============================3==============================
+    public static void main(String[] args) {
+        List<Long> ans = generateFib(15);
+        System.out.println(ans);
+    }
+    public static List<Long> generateFib(long num){
+        return Stream.iterate(
+                new long[]{0,1},s->new long[]{s[1],s[0]+s[1]})
+                .limit(num)
+                .map(n->n[0])
+                .collect(Collectors.toList());
+    }
+
+============================4==============================
+    public static void main(String[] args) {
+        String url = "jdbc:sqlserver://SRKSUR5195LT; trustServerCertificate=true;databaseName = airport_db";
+        String user = "sa";
+        String password = "01082002";
+        try {
+            Connection connection = DriverManager.getConnection(url, user,password);
+            Statement stmt = connection.createStatement();
+            String s = "Select * from dbo.citymast";
+            ResultSet rs = stmt.executeQuery(s);
+            if(rs.next()){
+                System.out.println(rs.getString(2));
+            }
+
+            System.out.println("Connected!!");
+        }
+        catch(SQLException e) {
+            System.out.println("error!!");
+            e.printStackTrace();
+        }
+    }

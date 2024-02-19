@@ -3,7 +3,7 @@ package Assignment_6;
 import java.sql.*;
     public class SQLServerConnection {
         public static void main(String[] args) {
-            String url = "jdbc:sqlserver://rex; trustServerCertificate=true;databaseName = airport_db";
+            String url = "jdbc:sqlserver://SRKSUR5195LT; trustServerCertificate=true;databaseName = airport_db";
             String user = "sa";
             String password = "01082002";
             try {
