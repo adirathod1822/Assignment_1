@@ -3,17 +3,17 @@ package Leetcode;
 import java.util.*;
 
 public class topKfreq {
-    public static void main(String[] args) {
+    public static void main(String[] arkgs) {
         int k = 2;
         int o = 0;
-        int[] arr = {1,2};
+        int[] arr = {1,1,1,2,2,3};
         HashMap<Integer,Integer> map = new HashMap<>();
         int  count = 0;
         int[] ans = new int[k];
         int i=0;
         int j=0;
         while(i != arr.length){
-            if(arr[i] == arr[j++]) {
+            if(arr[i] == arr[j++] && !map.containsKey(arr[i])) {
                 map.put(arr[i],count+=1);
             }
             if(j==arr.length){
@@ -22,7 +22,7 @@ public class topKfreq {
                 count = 0;
             }
         }
-        System.out.println("Map  "+map.clone());
+//        System.out.println("Map  "+map.clone());
         while(o!=k){
             int max = 0;
             int maxIndex = 1;
@@ -32,7 +32,7 @@ public class topKfreq {
                     maxIndex = m;
                 }
             }
-            System.out.println(map);
+//            System.out.println(map);
             map.remove(maxIndex);
             ans[o] = maxIndex;
             max = 0;
