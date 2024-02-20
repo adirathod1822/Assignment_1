@@ -8,6 +8,7 @@ public class topKfreq {
         int o = 0;
         int[] arr = {1,1,1,2,2,3};
         HashMap<Integer,Integer> map = new HashMap<>();
+
         int  count = 0;
         int[] ans = new int[k];
         int i=0;
