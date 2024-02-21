@@ -1,0 +1,120 @@
+============================1============================
+public class First implements Runnable {
+    @Override
+    public void run() {
+        System.out.println("Thread using Runnable interface is running");
+    }
+
+    public static void main(String[] args) {
+        First f = new First();
+        Thread t = new Thread(f);
+        t.start();
+    }
+}
+
+============================2============================
+public class Second extends Thread{
+    @Override
+    public void run() {
+        super.run();
+        System.out.println("Thread using thread class is running!!");
+    }
+
+    public static void main(String[] args) {
+        Second t = new Second();
+        t.start();
+    }
+}
+
+============================3============================
+public class Third extends Thread{
+     String task;
+     Third(String task) {
+         this.task = task;
+     }
+     @Override
+     public void run() {
+         super.run();
+         for (int i = 0; i < 5; i++) {
+             System.out.println( task + ":" + i );
+             try {
+                 Thread.sleep(1000);
+             }
+             catch (Exception e) {
+                 System.out.println(e.getMessage());
+             }
+         }
+     }
+
+     public static void main(String[] args) {
+         Third task1 = new Third("FirstThread");
+         Third task2 = new Third("SecondThread");
+
+         Thread t1 = new Thread(task1);
+         Thread t2 = new Thread(task2);
+
+         t1.start();
+         t2.start();
+     }
+ }
+
+============================4============================
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+
+public class Fourth {
+    public static void main(String[] args) {
+        ExecutorService executor = Executors.newFixedThreadPool(3);
+        for (int i = 0; i < 10; i++) {
+            Runnable worker = new WorkerThread("" + i);
+            executor.execute(worker);
+        }
+        executor.shutdown();
+        while (!executor.isTerminated()) {}
+        System.out.println("All threads are finished");
+    }
+}
+
+class WorkerThread implements Runnable{
+    String message;
+
+    WorkerThread(String message){
+        this.message=message;
+    }
+
+    @Override
+    public void run() {
+        System.out.println(Thread.currentThread().getName() + ", Message: " + message);
+        processMessage();
+        System.out.println(Thread.currentThread().getName() + ", End of Thread " );
+
+    }
+    public void processMessage(){
+        try{
+            Thread.sleep(200);
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+}
+
+============================5============================
+public class fifth extends Thread {
+    public void run() {
+        try {
+            Thread.sleep(1000);
+            System.out.println("Thread executed after 1 second delay");
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void main(String[] args) {
+        fifth thread1 = new fifth();
+        fifth thread2 = new fifth();
+        thread1.start();
+        thread2.start();
+    }
+}
