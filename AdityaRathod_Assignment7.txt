@@ -67,7 +67,7 @@ public class Fourth {
     public static void main(String[] args) {
         ExecutorService executor = Executors.newFixedThreadPool(3);
         for (int i = 0; i < 10; i++) {
-            Runnable worker = new WorkerThread("" + i);
+            Runnable worker = new WorkerThread( " Worker: "+ i + " Executing..");
             executor.execute(worker);
         }
         executor.shutdown();
@@ -85,36 +85,43 @@ class WorkerThread implements Runnable{
 
     @Override
     public void run() {
-        System.out.println(Thread.currentThread().getName() + ", Message: " + message);
-        processMessage();
-        System.out.println(Thread.currentThread().getName() + ", End of Thread " );
-
-    }
-    public void processMessage(){
+        System.out.println(Thread.currentThread().getName() +  message);
         try{
             Thread.sleep(200);
         }
         catch (Exception e){
             System.out.println(e.getMessage());
         }
+        System.out.println(Thread.currentThread().getName() + ", Thread Executed " );
+
     }
 }
 
 ============================5============================
 public class fifth extends Thread {
+    int sleep;
+    String msg;
+    Thread t;
+    public fifth(int sleep, String msg, Thread t){
+        this.sleep=sleep;
+        this.msg = msg;
+        this.t=t;
+    }
     public void run() {
         try {
-            Thread.sleep(1000);
-            System.out.println("Thread executed after 1 second delay");
+            Thread.sleep(sleep);
+            System.out.println("Thread "+msg+" executed");
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
 
     public static void main(String[] args) {
-        fifth thread1 = new fifth();
-        fifth thread2 = new fifth();
+        fifth thread1 = new fifth(0,"1",Thread.currentThread());
+        fifth thread2 = new fifth(1000,"2",Thread.currentThread());
         thread1.start();
         thread2.start();
+        System.out.println("Main ended");
     }
 }
+

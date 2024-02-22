@@ -8,7 +8,7 @@ public class Fourth {
     public static void main(String[] args) {
         ExecutorService executor = Executors.newFixedThreadPool(3);
         for (int i = 0; i < 10; i++) {
-            Runnable worker = new WorkerThread("" + i);
+            Runnable worker = new WorkerThread( " Worker: "+ i + " Executing..");
             executor.execute(worker);
         }
         executor.shutdown();
@@ -26,18 +26,15 @@ class WorkerThread implements Runnable{
 
     @Override
     public void run() {
-        System.out.println(Thread.currentThread().getName() + ", Message: " + message);
-        processMessage();
-        System.out.println(Thread.currentThread().getName() + ", End of Thread " );
-
-    }
-    public void processMessage(){
+        System.out.println(Thread.currentThread().getName() +  message);
         try{
             Thread.sleep(200);
         }
         catch (Exception e){
             System.out.println(e.getMessage());
         }
+        System.out.println(Thread.currentThread().getName() + ", Thread Executed " );
+
     }
 }
 
