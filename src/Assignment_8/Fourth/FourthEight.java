@@ -12,6 +12,6 @@ public class FourthEight {
         System.out.println("Max: " +  l.stream().distinct().max(Integer::compareTo).stream().toList().get(0));
         System.out.println("Min: " +  l.stream().distinct().min(Integer::compareTo).stream().toList().get(0));
         System.out.println("Sum: " +  l.stream().distinct().mapToInt(Integer::intValue).sum());
-        System.out.println("Sum: " +  l.stream().distinct().mapToInt(Integer::intValue).average().getAsDouble());
+        System.out.println("Average: " +  l.stream().distinct().mapToInt(Integer::intValue).average().getAsDouble());
     }
 }
