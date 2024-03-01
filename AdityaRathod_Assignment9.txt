@@ -1,0 +1,211 @@
+============================1============================
+import java.util.Queue;
+import java.util.concurrent.ConcurrentLinkedQueue;
+
+public class Message {
+    private final String msg;
+
+    public Message(String msg) {
+        this.msg = msg;
+    }
+
+    public String getMsg() {
+        return msg;
+    }
+}
+
+class MessageQueue{
+    Queue<Message> msgQ = new ConcurrentLinkedQueue<>();
+    public synchronized void publish(Message msg){
+        msgQ.offer(msg);
+        notifyAll();
+    }
+    public synchronized Message subscribe(){
+        while (msgQ.isEmpty()){
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                return null;
+            }
+        }
+        return msgQ.poll();
+    }
+}
+
+class Publisher{
+    private final MessageQueue msgQ;
+
+    Publisher(MessageQueue msgQ) {
+        this.msgQ = msgQ;
+    }
+
+    public void MessagePublisher(String message){
+        Message msg =new Message(message);
+        msgQ.publish(msg);
+    }
+}
+
+class subscriber{
+    private final MessageQueue msgQ;
+
+    subscriber(MessageQueue msgQ) {
+        this.msgQ = msgQ;
+    }
+
+    public void subMessage(){
+        while (true){
+            Message msg = msgQ.subscribe();
+            if (msg != null){
+                processMSG(msg);
+            }
+        }
+    }
+    public void processMSG(Message msg){
+        System.out.println("RECEIVE : "+msg.getMsg());
+    }
+}
+
+class PubSub{
+    public static void main(String[] args) {
+        MessageQueue msgQ = new MessageQueue();
+
+        Publisher pub = new Publisher(msgQ);
+        subscriber sub = new subscriber(msgQ);
+
+        Thread th = new Thread(sub::subMessage);
+        th.start();
+
+        for (int i = 0; i < 5; i++) {
+        pub.MessagePublisher(i+" message");
+        }
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        th.interrupt();
+        System.out.println("main end");
+    }
+}
+
+============================2============================
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Queue;
+import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicInteger;
+
+// Task interface
+interface Task {
+    void execute();
+}
+
+// Worker Node
+class WorkerNode implements Runnable {
+    private final Queue<Task> taskQueue;
+    private final List<String> results;
+
+    public WorkerNode(Queue<Task> taskQueue, List<String> results) {
+        this.taskQueue = taskQueue;
+        this.results = results;
+    }
+
+    @Override
+    public void run() {
+        while (true) {
+            Task task;
+            synchronized (taskQueue) {
+                while (taskQueue.isEmpty()) {
+                    try {
+                        taskQueue.wait();
+                    } catch (InterruptedException e) {
+                        Thread.currentThread().interrupt();
+                        return;
+                    }
+                }
+                task = taskQueue.poll();
+            }
+            if (task != null) {
+                task.execute();
+                synchronized (results) {
+                    results.add(Thread.currentThread().getName() + ": Task completed");
+                }
+            }
+        }
+    }
+}
+
+// Master Node
+class MasterNode {
+    private final Queue<Task> taskQueue;
+    private final List<String> results;
+    private final List<WorkerNode> workerNodes;
+
+    public MasterNode(int numWorkerNodes) {
+        taskQueue = new LinkedBlockingQueue<>();
+        results = new ArrayList<>();
+        workerNodes = new ArrayList<>();
+
+        for (int i = 0; i < numWorkerNodes; i++) {
+            WorkerNode workerNode = new WorkerNode(taskQueue, results);
+            workerNodes.add(workerNode);
+            new Thread(workerNode, "Worker-" + i).start();
+        }
+    }
+
+    public void submitTask(Task task) {
+        synchronized (taskQueue) {
+            taskQueue.add(task);
+            taskQueue.notifyAll();
+        }
+    }
+
+    public List<String> getResults() {
+        return results;
+    }
+}
+
+public class DistributedTaskExecutionFramework {
+    public static void main(String[] args) {
+        MasterNode masterNode = new MasterNode(1);
+
+        // Example tasks
+        Task task1 = () -> {
+            // Task execution logic
+            System.out.println("Task 1 executed");
+        };
+
+        Task task2 = () -> {
+            // Task execution logic
+            System.out.println("Task 2 executed");
+        };Task task3 = () -> {
+            // Task execution logic
+            System.out.println("Task 3 executed");
+        };Task task4 = () -> {
+            // Task execution logic
+            System.out.println("Task 4 executed");
+        };
+
+        // Submit tasks to the master node
+        masterNode.submitTask(task1);
+        masterNode.submitTask(task2);
+        masterNode.submitTask(task3);
+        masterNode.submitTask(task4);
+
+        // Wait for tasks to complete
+        try {
+            Thread.sleep(500); // Simulating some work
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+
+        // Print results
+        System.out.println("Results:");
+        for (String result : masterNode.getResults()) {
+            System.out.println(result);
+        }
+    }
+}
